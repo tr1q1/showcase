@@ -1,0 +1,18 @@
+# IDEA Ignores #
+################
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+local.properties
+
+# Compiled source #
+###################
+*.class
+
+# VCS #
+#######
+.svn
+.svn/
+CVS

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="GestionFichajes" namespace="GestionFichajes.Entities.DAL">
+  <class name="GestionFichajes.Entities.BOL.Fichajes.Fichaje" table="tbFICHAJE" select-before-update="true" lazy="false">
+    <id name="Id" column="id" type="Guid" unsaved-value="{00000000-0000-0000-0000-000000000000}">
+      <generator class="guid" />
+    </id>
+    <version name="Version" column="version" type="Int32" />
+
+    <property name="Empresa" column="empresa" type="Int32" />
+    <property name="Empleado" column="empleado" type="Int32" />
+    <property name="Fecha" column="fecha" type="DateTime" />
+    <property name="Concepto" column="concepto" type="String" length="2" />
+    <property name="Horas" column="horas" type="Int32" />
+    <property name="Minutos" column="minutos" type="Int32" />
+    
+    <property name="Borrado" column="borrado" type="Int32" />
+<!-- los valores de estas propiedades se gestionan directamente desde la BBDD mediante Triggers
+    <property name="userc" column="userc" type="String" length="80" />
+    <property name="hostc" column="hostc" type="String" length="80" />
+    <property name="datec" column="datec" type="DateTime" />
+    <property name="usera" column="usera" type="String" length="80" />
+    <property name="hosta" column="hosta" type="String" length="80" />
+    <property name="datea" column="datea" type="DateTime" />
+-->
+  </class>
+</hibernate-mapping>

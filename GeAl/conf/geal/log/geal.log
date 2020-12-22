@@ -1,0 +1,9 @@
+2016-07-05 10:04:01,850 [10] ERROR GeAl.util.DBHelper [(null)] - Authentication to host 'localhost' for user 'ga' using method 'mysql_native_password' failed with message: Access denied for user 'ga'@'localhost' (using password: YES)
+2016-07-05 15:22:57,984 [1] ERROR GeAl.persitencia.cliente.ClienteDAO [(null)] - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO ga.cliente (nombre, direccion, cp, poblacion, provincia, pais, telef' at line 1
+2016-07-05 15:24:58,883 [1] ERROR GeAl.persitencia.cliente.ClienteDAO [(null)] - Field 'fecha_modificacion' doesn't have a default value
+2016-07-05 15:27:34,822 [1] ERROR GeAl.persitencia.cliente.ClienteDAO [(null)] - Field 'user_modificacion' doesn't have a default value
+2016-07-05 16:27:43,573 [1] ERROR GeAl.persitencia.articulo.ArticuloDAO [(null)] - Column 'id' in field list is ambiguous
+2016-07-05 16:33:44,584 [1] ERROR GeAl.persitencia.articulo.ArticuloDAO [(null)] - La conversión especificada no es válida.
+2016-07-05 17:09:46,892 [1] ERROR GeAl.persitencia.movimiento.MovimientoDAO [(null)] - Fatal error encountered during command execution.
+2016-07-05 17:22:51,611 [1] ERROR GeAl.persitencia.movimiento.MovimientoDAO [(null)] - La conversión especificada no es válida.
+2016-07-05 17:24:38,731 [1] ERROR GeAl.persitencia.movimiento.MovimientoDAO [(null)] - La conversión especificada no es válida.

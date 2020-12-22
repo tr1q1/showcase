@@ -1,0 +1,26 @@
+## IntelliJ ##
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+
+
+## Eclipse ##
+.apt_generated/
+.classpath
+.project
+.settings/
+
+
+## VCS ##
+.svn
+.svn/
+CVS
+
+
+## Build ##
+log/
+target/
+EXPS/
+*.class

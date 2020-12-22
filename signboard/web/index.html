@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
+
+		<script src="/resources/js/angular.min.js"></script>
+		<script src="/resources/js/jquery-1.11.1.min.js"></script>
+		<script src="/resources/js/jquery.mobile-1.4.4.min.js"></script>
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+			</script>
+		<![endif]-->
+		<style>
+			.controlgroup-textinput { padding-top:.20em; padding-bottom:.30em; }
+			div.ui-input-search { width: 500px !important; }
+		</style>
+
+		<title>SignBoard - Tablón de Anuncios</title>
+	</head>
+
+<body data-ng-app="signboard">
+	<div data-role="page" data-ng-controller="MainController"data-ng-init="getItems('topic'); getItems('pais'); getItems('provincia'); getItems('ciudad');">
+		<div data-role="header">
+		    <div data-role="controlgroup" data-type="horizontal">
+				<input type="search" id="item" placeholder=". . ." data-wrapper-class="controlgroup-textinput ui-btn">
+				<a href="#enlace" class="ui-btn ui-btn-inline ui-corner-all ui-icon-search ui-btn-icon-right">Buscar</a>
+			</div>
+			
+			<div data-role="controlgroup" data-type="horizontal">
+				<div data-role="collapsible">
+					<h1>Filtros</h1>
+					<p>
+						<fieldset class="ui-field-contain">
+							<label for="tema">Tema</label>
+					        <select
+					        	id="topic"
+					        	data-ng-model="topic">
+					        	<option value="">-- Seleccione un tópico --</option>
+					        	<option data-ng-repeat="item in topic" value="{{item.id}}">{{item.nombre}}</option>
+					        </select>
+
+							<label for="pais">País</label>
+					        <select
+					        	id="pais"
+					        	data-ng-model="pais">
+					        	<option value="">-- Seleccione un país --</option>
+					        	<option data-ng-repeat="item in pais" value="{{item.id}}">{{item.nombre}}</option>
+							</select>
+
+							<label for="provincia">Provincia</label>
+					        <select
+					        	id="provincia"
+					        	data-ng-model="provincia"
+					        	data-ng-disabled="!pais">
+					        	<option value="">-- Seleccione un provincia --</option>
+					        	<option data-ng-repeat="item in provincia" value="{{item.id}}">{{item.nombre}}</option>
+							</select>
+
+							<label for="ciudad">Ciudad</label>
+					        <select
+					        	id="ciudad"
+					        	data-ng-model="ciudad"
+					        	data-ng-disabled="!provincia">
+					        	<option value="">-- Seleccione un ciudad --</option>
+					        	<option data-ng-repeat="item in ciudad" value="{{item.id}}">{{item.nombre}}</option>
+							</select>
+						</fieldset>
+					</p>
+				</div>
+			</div>
+		    
+
+		    <a href="#" class="ui-btn ui-btn-inline ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-right">Options</a>
+  		</div>
+
+		<div data-role="main" class="ui-content">
+			<p>Sin resultados...</p>
+		</div>
+
+		<div data-role="footer">
+			<p align="center">Contacto: <a href="mailto:tino@pernasferreiro.es">tino@pernasferreiro.es</a>.</p>
+		</div>
+	</div>
+
+<script>
+var app = angular.module('signboard', []);
+app.controller('MainController', ['$scope', '$http',
+function ($scope, $http)
+{
+	$scope.getItems = function(item)
+	{
+	  $http(
+	  {
+	    method: 'GET',
+		respondType: 'json',
+		headers:
+		{
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+	    },
+	    url: '//testingd/ws/' + item
+	  })
+	  .success(function (data, status, headers, config)
+	  {
+	    // See here, we are now assigning this username
+	    // to our existing model!
+	    $scope[item] = data[item];
+	  })
+	  .error(function (data, status, headers, config)
+	  {
+	    alert('response error: ' + status);
+	  });
+	}
+}]);
+
+</script> 
+</body>
+</html>

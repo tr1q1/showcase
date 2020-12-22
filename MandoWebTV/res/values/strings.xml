@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mando WebTV</string>
+    <string name="title_activity_opciones">Preferences</string>
+    <string name="option_etIP_summary">Dirección de Internet asignada a tu WebTV en tu red local</string>
+    <string name="option_etIP_title">IP de tu WebTV</string>
+
+</resources>

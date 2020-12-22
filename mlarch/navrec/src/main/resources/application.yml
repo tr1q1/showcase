@@ -1,0 +1,67 @@
+## CONFIGURACION LOCAL
+spring:
+  application:
+    name: navrec
+  profiles:
+    active: default,standalone
+
+server: ## TODO
+  port: 8080
+
+app:
+  id: ${spring.application.name}
+  version: 1.0.0
+
+logging:
+  level:
+    root: ERROR
+    es.pernasferreiro: DEBUG
+
+amiga:
+  service:
+    aaa:
+      local:
+        enable-local-test: true
+      classic:
+        sso:
+          applicationSSO: ## AppWebInergy
+    rest:
+      logging:
+        is-production: false
+    rest-swagger:
+      ui:
+        title: "@project.name@"
+        description: "@project.description@"
+    jms:
+      mlarch:
+        tenant: MLA
+        microservice: data
+        destination-visibility: private
+        destination-name: LOCAL
+      queueNavegacion:
+        destination-fqdn: ${amiga.service.jms.mlarch.tenant}.${amiga.service.jms.queueNavegacion.domain}.${amiga.service.jms.mlarch.microservice}.${amiga.service.jms.mlarch.destination-visibility}.${amiga.service.jms.mlarch.destination-name}
+        domain: IN
+  data:
+    jms:
+      connectionFactory:
+        broker:
+          brokerURL: tcp://127.0.0.1:61616 ## TODO
+          userName: admin ## TODO
+          password: password ## TODO
+      client:
+        queueNavegacion:
+          destinationName: ${amiga.service.jms.queueNavegacion.destination-fqdn}
+          receiveTimeout: 100
+          pubSubDomain: false
+
+elasticsearch:
+  clustername: elasticsearch-docker-cluster
+  host: 127.0.0.1
+  port: 9300
+
+es:
+  pernasferreiro:
+    ml:
+      jms:
+        conf:
+          NAVQ: ${amiga.service.jms.queueNavegacion.destination-fqdn}

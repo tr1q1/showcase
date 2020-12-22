@@ -1,0 +1,193 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}"
+    android:background="#222" >
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btDown"
+        android:layout_toLeftOf="@+id/btOk"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="100.0dip"
+        fontawesometext:bb_icon_left="fa-arrow-left"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="primary" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btDown"
+        android:layout_toRightOf="@+id/btDown"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="100.0dip"
+        fontawesometext:bb_icon_left="fa-arrow-right"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="primary" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="100.0dip"
+        fontawesometext:bb_icon_left="fa-cog"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="info" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="100.0dip"
+        fontawesometext:bb_icon_left="fa-windows"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="default" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="100.0dip"
+        fontawesometext:bb_icon_left="fa-arrow-up"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="primary" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btUp"
+        android:layout_toLeftOf="@+id/btRight"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="100.0dip"
+        fontawesometext:bb_icon_left="fa-dot-circle-o"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="default" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btUp"
+        android:layout_below="@+id/btOk"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="100.0dip"
+        fontawesometext:bb_icon_left="fa-arrow-down"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="primary" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btRight"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="100.0dip"
+        fontawesometext:bb_icon_left="fa-reply"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="danger" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btStop"
+        android:layout_toLeftOf="@+id/btRight"
+        android:layout_toRightOf="@+id/btLeft"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="80.0dip"
+        fontawesometext:bb_icon_left="fa-pause"
+        fontawesometext:bb_icon_right="fa-play"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="default" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btForward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btRight"
+        android:layout_alignTop="@+id/btPlay"
+        android:layout_marginTop="34.0dip"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="80.0dip"
+        fontawesometext:bb_icon_left="fa-forward"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="default" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btRewind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btForward"
+        android:layout_toLeftOf="@+id/btPlay"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="80.0dip"
+        fontawesometext:bb_icon_left="fa-backward"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="default" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btLeft"
+        android:height="80.0dip"
+        android:minHeight="80.0dip"
+        android:minWidth="80.0dip"
+        android:width="80.0dip"
+        fontawesometext:bb_icon_left="fa-stop"
+        fontawesometext:bb_roundedCorners="true"
+        fontawesometext:bb_size="large"
+        fontawesometext:bb_type="default" />
+
+</RelativeLayout>

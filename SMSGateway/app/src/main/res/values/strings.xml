@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SMSGateway</string>
+    <string name="lblServer">http://localhost:8766</string>
+</resources>

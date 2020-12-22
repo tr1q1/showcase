@@ -1,0 +1,5 @@
+- init.sh: inicio de los servicios de ES, Spark y Mongo visibles entre ellos
+- load.sh: carga de los ficheros de Foursquare en ES desde Spark
+- test.sh: ejecución de un Batch de Agregación sobre los datos de FourSquare de ES y el resultado se guarda en MongoDB
+- stop.sh: se detienen los servicios conservando su estado
+- clean.sh: se detienen los servicios por completo y se borran los temporales

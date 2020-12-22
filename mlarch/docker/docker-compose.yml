@@ -1,0 +1,199 @@
+version: "3.1"
+services:
+############
+  master:
+    image: gettyimages/spark
+    command: bin/spark-class org.apache.spark.deploy.master.Master -h master
+    container_name: spark_master
+    hostname: master
+    volumes:
+      - ./conf/master:/conf
+      - ./data:/tmp/data
+    environment:
+      MASTER: spark://master:7077
+      SPARK_CONF_DIR: /conf
+      SPARK_PUBLIC_DNS: localhost
+    expose:
+      - 7001
+      - 7002
+      - 7003
+      - 7004
+      - 7005
+      - 7077
+      - 6066
+    ports:
+      - 4040:4040
+      - 6066:6066
+      - 7077:7077
+      - 8080:8080
+      - 4567:4567
+############
+  worker:
+    image: gettyimages/spark
+    command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+    container_name: spark_worker
+    hostname: worker
+    volumes:
+      - ./conf/master:/conf
+      - ./data:/tmp/data
+    environment:
+      SPARK_CONF_DIR: /conf
+      SPARK_WORKER_CORES: 2
+      SPARK_WORKER_MEMORY: 1g
+      SPARK_WORKER_PORT: 8881
+      SPARK_WORKER_WEBUI_PORT: 8081
+      SPARK_PUBLIC_DNS: localhost
+    links:
+      - master
+    expose:
+      - 7012
+      - 7013
+      - 7014
+      - 7015
+      - 8881
+    ports:
+      - 8081:8081
+############
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    container_name: elasticsearch
+    hostname: elasticsearch
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - discovery.zen.minimum_master_nodes=1
+      - network.publish_host=localhost
+      - transport.publish_port=9300
+      - cluster.name=elasticsearch-docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    links:
+      - master
+      - worker
+############
+  elasticsearch2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    container_name: elasticsearch2
+    hostname: elasticsearch2
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - network.publish_host=localhost
+      - transport.publish_port=9300
+      - cluster.name=elasticsearch-docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata2:/usr/share/elasticsearch/data
+    links:
+      - master
+      - worker
+      - elasticsearch
+############
+##  kibana:
+##    image: docker.elastic.co/kibana/kibana:6.5.4
+##    container_name: kibana
+##    hostname: kibana
+##    environment:
+##      - server.name=kibana
+##      - elasticsearch.url=http://elasticsearch:9200
+##      - xpack.monitoring.ui.container.elasticsearch.enabled=true
+##    ports:
+##      - 5601:5601
+##    links:
+##      - master
+##      - worker
+##      - elasticsearch
+##      - elasticsearch2
+##
+##  zeppelin:
+##    image: apache/zeppelin:0.8.1
+##    container_name: zeppelin
+##    hostname: zeppelin
+##    environment:
+##      - ZEPPELIN_LOG_DIR=/logs
+##      - ZEPPELIN_NOTEBOOK_DIR=/notebook
+##    volumes:
+##      - ./data/zeppelin/logs:/logs
+##      - ./data/zeppelin/notebook:/notebook
+##    ports:
+##      - 8082:8080
+##    links:
+##      - master
+##      - worker
+##      - elasticsearch
+##      - elasticsearch2
+############
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    hostname: mongodb
+    volumes:
+##      - ./data/mongo:/data/db ## no funciona con WSL, https://stackoverflow.com/questions/35400740/how-to-set-docker-mongo-data-volume
+      - mongoml:/data/db
+    ports:
+      - 27017:27017
+    links:
+      - master
+      - worker
+      - elasticsearch
+      - elasticsearch2
+##      - kibana
+##      - zeppelin
+############
+  activemq:
+    image: webcenter/activemq:latest
+    container_name: activemq
+    hostname: activemq
+    ports:
+      # mqtt
+      - "1883:1883"
+      # amqp
+      - "5672:5672"
+      # ui
+      - "8161:8161"
+      # stomp
+      - "61613:61613"
+      # ws
+      - "61614:61614"
+      # jms
+      - "61616:61616"
+    volumes:
+      - activemq-data:/opt/activemq/conf
+      - activemq-data:/data/activemq
+      - activemq-data:/var/log/activemq
+    environment:
+      - ACTIVEMQ_REMOVE_DEFAULT_ACCOUNT=true
+      - ACTIVEMQ_ADMIN_LOGIN=admin
+      - ACTIVEMQ_ADMIN_PASSWORD=password
+      - ACTIVEMQ_WRITE_LOGIN=write
+      - ACTIVEMQ_WRITE_PASSWORD=password
+      - ACTIVEMQ_READ_LOGIN=read
+      - ACTIVEMQ_READ_PASSWORD=password
+      - ACTIVEMQ_JMX_LOGIN=jmx
+      - ACTIVEMQ_JMX_PASSWORD=password
+##      - ACTIVEMQ_STATIC_TOPICS=static-topic-1;static-topic-2
+##      - ACTIVEMQ_STATIC_QUEUES=static-queue-1;static-queue-2
+      - ACTIVEMQ_ENABLED_SCHEDULER=true
+      - ACTIVEMQ_MIN_MEMORY=512
+      - ACTIVEMQ_MAX_MEMORY=2048
+############
+volumes:
+  mongoml:
+  esdata:
+  esdata2:
+  activemq-data:

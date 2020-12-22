@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body ng-app="app">
+<div class="container" ng-controller="MainController">
+
+<label class="control-label">Entidad:</label>
+<input class="" type="text" ng-model="item"><button class="btn btn-success" ng-click="consultar()">Consultar</button><br>
+<ul>
+  <li ng-repeat="x in items">
+    {{ x.nombre }}
+  </li>
+</ul>
+
+</div>
+
+<script>
+var app = angular.module('app', []);
+app.controller('MainController', ['$scope', '$http',
+function ($scope, $http)
+{
+	$scope.item = 'pais';
+	$scope.consultar = function()
+	{
+	  $http(
+	  {
+	    method: 'GET',
+		respondType: 'json',
+		headers:
+		{
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+	    },
+	    url: '//testingd/ws/' + $scope.item
+	  })
+	  .success(function (data, status, headers, config)
+	  {
+	    // See here, we are now assigning this username
+	    // to our existing model!
+	    $scope.items = data[$scope.item];
+	  })
+	  .error(function (data, status, headers, config)
+	  {
+	    alert('response error: ' + status);
+	  });
+	}
+}]);
+
+</script> 
+
+</body>
+</html>

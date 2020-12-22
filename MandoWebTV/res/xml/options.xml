@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="Configuración de red">
+	    <EditTextPreference
+	        android:defaultValue="192.168.10.12"
+	        android:key="etIP"
+	        android:summary="@string/option_etIP_summary"
+	        android:title="@string/option_etIP_title">
+	    </EditTextPreference>
+	</PreferenceCategory>
+</PreferenceScreen>
