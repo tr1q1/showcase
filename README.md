@@ -117,3 +117,4 @@ Proyecto formado por distintos componentes todos basados en Spring Boot (JMS Lis
 * mlws: Componente encargado de exponer los resultados de las recomendaciones y categorización de los usuarios, así cómo obtener distintas estadísticas de los datos ingestados.
 
 ________________________
+
